@@ -10,10 +10,10 @@ use App\Http\Controllers\Dashboard\PinjamanController;
 use App\Http\Controllers\Dashboard\PinjamanBarangController;
 use App\Http\Controllers\Dashboard\UserController;
 
-use App\Http\Controllers\Public\BarangController as PublicBarangController;
-use App\Http\Controllers\Public\ProfileController as PublicProfileController;
-use App\Http\Controllers\Public\RiwayatPinjamanController as PublicRiwayatPinjamanController;
-use App\Http\Controllers\Public\TroliController as PublicTroliController;
+use App\Http\Controllers\User\BarangController as UserBarangController;
+use App\Http\Controllers\User\ProfileController as UserProfileController;
+use App\Http\Controllers\User\RiwayatPinjamanController as UserRiwayatPinjamanController;
+use App\Http\Controllers\User\TroliController as UserTroliController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,17 +29,17 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'store']);
 
-Route::get('/', [PublicBarangController::class, 'index']);
-Route::get('/troli', [PublicTroliController::class, 'index']);
-Route::get('/troli/next', [PublicTroliController::class, 'next']);
-Route::post('/troli/next', [PublicTroliController::class, 'store']);
-Route::get('/troli/quick-add/{id}', [PublicTroliController::class, 'quickStore']);
-Route::get('/troli/quick-delete/{id}', [PublicTroliController::class, 'quickDestroy']);
-Route::get('/pinjaman/create', [PublicRiwayatPinjamanController::class, 'create']);
+Route::get('/', [UserBarangController::class, 'index']);
+Route::get('/troli', [UserTroliController::class, 'index']);
+Route::get('/troli/next', [UserTroliController::class, 'next']);
+Route::post('/troli/next', [UserTroliController::class, 'store']);
+Route::get('/troli/quick-add/{id}', [UserTroliController::class, 'quickStore']);
+Route::get('/troli/quick-delete/{id}', [UserTroliController::class, 'quickDestroy']);
+Route::get('/pinjaman/create', [UserRiwayatPinjamanController::class, 'create']);
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/profile', [PublicProfileController::class, 'index']);
-    Route::get('/riwayat-pinjaman', [PublicRiwayatPinjamanController::class, 'index']);
-    Route::get('/pinjaman/show/{id}', [PublicRiwayatPinjamanController::class, 'show']);
+    Route::get('/profile', [UserProfileController::class, 'index']);
+    Route::get('/riwayat-pinjaman', [UserRiwayatPinjamanController::class, 'index']);
+    Route::get('/pinjaman/show/{id}', [UserRiwayatPinjamanController::class, 'show']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
