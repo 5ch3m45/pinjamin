@@ -64,7 +64,7 @@
                                             {{ $pinjaman->user->name }}
                                         </a>
                                     </td>
-                                    <td>{{ $pinjaman->status }}</td>
+                                    <td>{!! $pinjaman->status !!}</td>
                                     <td>
                                         <a data-bs-toggle="collapse" href="#collapse{{ $pinjaman->id }}" role="button" aria-expanded="false" aria-controls="collapse{{ $pinjaman->id }}">Lihat Barang</a> |
                                         <a href="/dashboard/pinjaman/edit/{{ $pinjaman->id }}" class="text-primary">Edit</a> |
@@ -109,10 +109,10 @@
                                                             @if($pinjaman_barang->tanggal_peminjaman)
                                                                 @if($pinjaman_barang->tanggal_pengembalian) {{ $pinjaman_barang->tanggal_pengembalian }}
                                                                 @else 
-                                                                    @if($pinjaman_barang->tanggal_peminjaman == '1970-01-01')
-                                                                        -
+                                                                    @if($pinjaman_barang->tanggal_peminjaman === NULL)
+                                                                    <a href="javascript:void(0)" class="text-primary konfirmasi-pengembalian" data-id="{{ $pinjaman_barang->id }}">Konfirmasi pengembalian</a>
                                                                     @else 
-                                                                        <a href="javascript:void(0)" class="text-primary konfirmasi-pengembalian" data-id="{{ $pinjaman_barang->id }}">Konfirmasi pengembalian</a>
+                                                                    -
                                                                     @endif
                                                                 @endif
                                                             @else - @endif
