@@ -68,8 +68,6 @@ class Pinjaman extends Model
             $date1 = new \DateTime();
             $date2 = new \DateTime($this->rencana_pengembalian);
             $interval = $date1->diff($date2)->format('%R%a');
-            echo (int)$interval;
-            dd($interval);
             if((int)$interval < 0) {
                 return '<span class="text-danger">BELUM DIKEMBALIKAN, TELAT PENGEMBALIAN</span>';
             }
