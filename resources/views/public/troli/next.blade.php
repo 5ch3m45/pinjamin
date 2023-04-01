@@ -75,8 +75,8 @@
                             <tr>
                                 <th>Rencana Pengembalian</th>
                                 <td>
-                                    <input type="date" class="form-control" name="rencana_tanggal_pengembalian" value="">
-                                    @error('rencana_tanggal_pengembalian') <div class="mt-2 text-danger">{{ $message }}</div> @enderror
+                                    <input type="date" class="form-control" name="rencana_pengembalian" value="">
+                                    @error('rencana_pengembalian') <div class="mt-2 text-danger">{{ $message }}</div> @enderror
                                 </td>
                             </tr>
                         </tbody>
