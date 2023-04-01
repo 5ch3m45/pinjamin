@@ -131,7 +131,7 @@ class PinjamanController extends Controller
 
         $pinjaman = Pinjaman::findOrFail($id);
         $pinjaman->update([
-            'tanggal_pengajuan' => $request->tanggal_pengajuan
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'rencana_pengembalian' => $request->rencana_pengembalian
         ]);
 
