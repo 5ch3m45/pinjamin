@@ -68,6 +68,7 @@ class Pinjaman extends Model
             $date1 = new \DateTime();
             $date2 = new \DateTime($this->rencana_pengembalian);
             $interval = $date1->diff($date2)->format('%R%a');
+            dd($interval);
             if($interval < 0) {
                 return 'SEDANG DIPINJAM';
             }
