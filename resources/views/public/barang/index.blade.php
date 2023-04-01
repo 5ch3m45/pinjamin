@@ -61,7 +61,7 @@
             @foreach ($barangs as $key => $barang)
             <div class="grid-item p-2">
                     <div class="card">
-                        {{-- <img src="/assets/img/placeholder.jpeg" class="card-img-top" alt="..."> --}}
+                        <img src="/assets/img/placeholder.jpeg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">{{ $barang->nama }} {{ $barang->merk }}</h6>
                             <p class="card-text">{{ $barang->keterangan ?? '-' }}</p>
