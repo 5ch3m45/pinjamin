@@ -2,21 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Dashboard\{
-    AdminController,
-    BarangController,
-    DashboardController,
-    LokasiController,
-    PinjamanController,
-    PinjamanBarangController,
-    UserController,
-};
-use App\Http\Controllers\Public\{
-    BarangController as PublicBarangController,
-    ProfileController as PublicProfileController,
-    RiwayatPinjamanController as PublicRiwayatPinjamanController,
-    TroliController as PublicTroliController,
-};
+use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\BarangController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\LokasiController;
+use App\Http\Controllers\Dashboard\PinjamanController;
+use App\Http\Controllers\Dashboard\PinjamanBarangController;
+use App\Http\Controllers\Dashboard\UserController;
+
+use App\Http\Controllers\Public\BarangController as PublicBarangController;
+use App\Http\Controllers\Public\ProfileController as PublicProfileController;
+use App\Http\Controllers\Public\RiwayatPinjamanController as PublicRiwayatPinjamanController;
+use App\Http\Controllers\Public\TroliController as PublicTroliController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
