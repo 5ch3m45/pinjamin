@@ -56,6 +56,7 @@ class TroliController extends Controller
             $request->validate([
                 'kode' => 'required',
                 'tanggal_pengajuan' => 'required|date',
+                'rencana_pengembalian' => 'required|date'
             ]);
 
             $user = User::find(auth()->id());
@@ -63,6 +64,7 @@ class TroliController extends Controller
             $request->validate([
                 'kode' => 'required',
                 'tanggal_pengajuan' => 'required|date',
+                'rencana_pengembalian' => 'required|date',
                 'name' => 'required',
                 'unit' => 'required',
                 'contact' => 'required'
@@ -110,7 +112,8 @@ class TroliController extends Controller
         $pinjaman = Pinjaman::create([
             'kode' => $kode,
             'user_id' => $user->id,
-            'tanggal_pengajuan' => $request->tanggal_pengajuan
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
+            'rencana_pengembalian' => $request->rencana_pengembalian
         ]);
 
         $pinjaman_barangs = [];
