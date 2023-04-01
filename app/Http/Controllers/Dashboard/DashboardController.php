@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        return redirect()->to('/dashboard/pinjaman');
         return view('dashboard.index');
     }
 
