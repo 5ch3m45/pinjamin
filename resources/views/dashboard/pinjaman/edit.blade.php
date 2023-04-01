@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title') Detail Pinjaman @endsection
+@section('title') Edit Pinjaman @endsection
 
 @section('content')
     <div>
-        <h3><i class="bi bi-list-check"></i> Tambah Pinjaman</h3>
+        <h3><i class="bi bi-list-check"></i> Edit Pinjaman</h3>
         <nav aria-label="breadcrumb mb-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="/dashboard/pinjaman">Pinjaman</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Detail Pinjaman</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Pinjaman</li>
             </ol>
         </nav>
 
@@ -18,7 +18,7 @@
         <div class="card mb-4">
             <form method="POST" class="card-body">
                 @csrf
-                <h5>Detail</h5>
+                <h5>Informasi</h5>
                 <div class="table-responsive mb-2">
                     <table id="form-table" class="table table-bordered">
                         <tbody>
@@ -44,9 +44,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Status</th>
+                                <th>Rencana Pengembalian</th>
                                 <td>
-                                    <input type="text" readonly class="form-control" value="{{ $pinjaman->status }}">
+                                    <input type="date" name="rencana_pengembalian" class="form-control" value="{{ $pinjaman->rencana_pengembalian }}">
+                                    @error('rencana_pengembaluan') <div class="mt-2 text-danger">{{ $message }}</div> @enderror
                                 </td>
                             </tr>
                         </tbody>
