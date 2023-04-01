@@ -125,12 +125,14 @@ class PinjamanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tanggal_pengajuan' => 'nullable|date'
+            'tanggal_pengajuan' => 'nullable|date',
+            'rencana_pengembalian' => 'nullable|date'
         ]);
 
         $pinjaman = Pinjaman::findOrFail($id);
         $pinjaman->update([
             'tanggal_pengajuan' => $request->tanggal_pengajuan
+            'rencana_pengembalian' => $request->rencana_pengembalian
         ]);
 
         return redirect()->to('/dashboard/pinjaman/show/'.$id)->with('success', 'Pinjaman berhasil diperbarui.');
