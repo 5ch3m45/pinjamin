@@ -67,8 +67,7 @@ class Pinjaman extends Model
         if($barang_belum_dikembalikan == $barang_dipinjam) {
             $date1 = new \DateTime();
             $date2 = new \DateTime($this->rencana_pengembalian);
-            $interval = $date1->diff($date2)->format('%d');
-            dd($interval);
+            $interval = $date1->diff($date2)->format('%R%a');
             if($interval < 0) {
                 return 'SEDANG DIPINJAM';
             }
