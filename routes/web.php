@@ -93,3 +93,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'is_admin']], fu
     Route::get('/user/show/{id}', [UserController::class, 'show']);
     Route::post('/user/edit/{id}/verifikasi', [UserController::class, 'verify']);
 });
+
+Route::get('my-artisan-storage-link', function() {
+    \Artisan::call('storage:link');
+});
+Route::get('my-artisan-optimize', function() {
+    \Artisan::call('optimize');
+});
