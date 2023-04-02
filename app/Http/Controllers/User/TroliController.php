@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use \Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Mail\SignupInfo;
 use App\Models\Barang;
 use App\Models\Pinjaman;
 use App\Models\PinjamanBarang;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class TroliController extends Controller
 {
@@ -90,13 +92,21 @@ class TroliController extends Controller
             // jika belum register
             if(!$user) {
                 // registerkan
+                $password = \Str::random(6);
                 $user = User::create([
                     'name' => $request->name,
                     'email' => $email ? $email : preg_replace("/[^a-z]+/", "", strtolower($request->name)).'@mail7.io',
                     'phone' => $phone ? $phone : '',
                     'unit' => $request->unit,
-                    'password' => Hash::make(\Str::random(6))
+                    'password' => Hash::make($password)
                 ]);
+                // kirim email info registrasi
+                try {
+                    $mail = new SignupInfo($user, $password);
+                    Mail::to($user->email)->send($mail);
+                } catch (\Exception $e) {
+                    \Log::error('error send email:'.$e->getMessage());
+                }
             }
     
             // loginkan

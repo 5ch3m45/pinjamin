@@ -58,9 +58,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Email/HP</th>
+                                    <th>Email</th>
                                     <td>
-                                        <input type="text" required class="form-control" name="contact">
+                                        <input type="email" required class="form-control" name="contact">
                                         @error('contact') <div class="mt-2 text-danger">{{ $message }}</div> @enderror
                                     </td>
                                 </tr>
