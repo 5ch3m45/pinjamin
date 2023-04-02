@@ -66,7 +66,7 @@
                                 <td>
                                     @if($barang->fotos)
                                         @foreach($barang->fotos as $foto)
-                                        <img src="{{ \Storage::url($foto->foto) }}" alt="" style="max-height: 10rem; max-width: 10rem; margin: auto 0px;">
+                                        <img src="/assets/{{ ($foto->foto) }}" alt="" style="max-height: 10rem; max-width: 10rem; margin: auto 0px;">
                                         @endforeach
                                     @endif
                                 </td>

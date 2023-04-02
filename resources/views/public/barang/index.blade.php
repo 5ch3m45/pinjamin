@@ -47,7 +47,9 @@
             @if($barangs)
             <div class="grid-sizer p-2">
                 <div class="card shadow-none">
-                    {{-- <img src="/assets/img/placeholder.jpeg" class="card-img-top" alt="..."> --}}
+                    @if($barang->fotos && $barang->fotos->count() > 0)
+                        <img src="/assets/{{ $barang->fotos[0]->foto }}" class="card-img-top" style="border-radius: 10px 10px 5px 5px">
+                    @endif
                     <div class="card-body shadow-none">
                         <h6 class="card-title">{{ $barangs[0]->nama }} {{ $barangs[0]->merk }}</h6>
                         <p class="card-text">{{ $barangs[0]->keterangan ?? '-' }}</p>
@@ -63,7 +65,7 @@
             <div class="grid-item p-2">
                     <div class="card">
                         @if($barang->fotos && $barang->fotos->count() > 0)
-                        <img src="{{ \Storage::url($barang->fotos[0]->foto) }}" class="card-img-top" style="border-radius: 10px 10px 5px 5px">
+                        <img src="/assets/{{ $barang->fotos[0]->foto }}" class="card-img-top" style="border-radius: 10px 10px 5px 5px">
                         @endif
                         <div class="card-body">
                             <h6 class="card-title">{{ $barang->nama }} {{ $barang->merk }}</h6>
