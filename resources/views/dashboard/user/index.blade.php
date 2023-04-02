@@ -12,6 +12,8 @@
             </ol>
         </nav>
 
+        <x-alert.success-and-error/>
+
         <div class="card mb-4">
             <div class="card-body">
                 <h5>Filter</h5>
@@ -46,6 +48,7 @@
                                 <th>Unit</th>
                                 <th>Email</th>
                                 <th>Nomor HP</th>
+                                <th>Status</th>
                                 <th>:</th>
                             </tr>
                         </thead>
@@ -58,8 +61,12 @@
                                 <td>{{ $user->unit }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>{{ $user->status_text }}</td>
                                 <td>
-                                    <a href="javascript:void(0)" class="text-danger hapus-user" data-id="{{ $user->id }}" data-name="{{ $user->name }}">Hapus</a>
+                                    @if($user->is_verified == 0)
+                                    <a id="verifikasi-user-{{ $user->id }}" href="javascript:void(0)" class="text-primary verifikasi-user" data-id="{{ $user->id }}" data-nama="{{ $user->name }}">Verifikasi</a> | 
+                                    @endif
+                                    <a href="javascript:void(0)" class="text-danger hapus-user" data-id="{{ $user->id }}" data-nama="{{ $user->name }}">Hapus</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -70,4 +77,7 @@
             </div>
         </div>
     </div>
+
+    <x-modal.hapus-user/>
+    <x-modal.verifikasi-user/>
 @endsection

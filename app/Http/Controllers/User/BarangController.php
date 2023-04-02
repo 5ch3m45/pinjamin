@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use chillerlan\QRCode\QRCode;
 
 class BarangController extends Controller
 {
@@ -68,7 +69,12 @@ class BarangController extends Controller
      */
     public function show($id)
     {
-        //
+        $barang = Barang::findOrFail($id);
+        $qr = (new QRCode)->render(url('/').'/barang/show/'.$id);
+        return view('public.barang.show', [
+            'barang' => $barang,
+            'qr' => $qr
+        ]);
     }
 
     /**

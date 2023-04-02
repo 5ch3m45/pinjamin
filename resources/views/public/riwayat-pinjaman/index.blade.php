@@ -12,6 +12,7 @@
             </ol>
         </nav>
 
+        <x-alert.user-belum-terverifikasi/>
         <x-alert.success-and-error/>
 
         <div class="card mb-4">
@@ -33,9 +34,15 @@
                             <label class="form-label">&nbsp;</label>
                         </div>
                         <button type="submit" class="btn btn-primary me-2"><i class="bi bi-search"></i> Cari</button>
+                        @if(auth()->check() && auth()->user()->is_verified == 0)
+                        <span class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Akun Anda belum terverifikasi">
+                            <button type="button" disabled class="btn btn-light">+ Baru</button>
+                        </span>
+                        @else
                         <a href="/pinjaman/create">
                             <button type="button" class="btn btn-success">+ Baru</button>
                         </a>
+                        @endif
                     </div>
                 </form>
             </div>

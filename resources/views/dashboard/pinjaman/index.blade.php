@@ -28,14 +28,23 @@
                             <option value="kode">Kode</option>
                         </select>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3 mb-3">
+                    <div class="col mb-3">
                         <div>
                             <label class="form-label">&nbsp;</label>
                         </div>
                         <button type="submit" class="btn btn-primary me-2"><i class="bi bi-search"></i> Cari</button>
-                        <a href="/dashboard/pinjaman/create">
+                        <a href="/dashboard/pinjaman/create" class="me-2">
                             <button type="button" class="btn btn-success">+ Baru</button>
                         </a>
+                        @if(\Request::has('user_not_verified') && \Request::get('user_not_verified') == 1)
+                        <a href="/dashboard/pinjaman">
+                            <button type="button" class="btn btn-light"><i class="bi bi-chevron-left"></i> Kembali</button>
+                        </a>
+                        @else
+                        <a href="?user_not_verified=1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Dari user belum terverifikasi">
+                            <button type="button" class="btn btn-danger">Pinjaman lain <span class="badge bg-danger">{{$pinjamans_unverified_user_count  }}</span></button>
+                        </a>
+                        @endif
                     </div>
                 </form>
             </div>
@@ -62,7 +71,7 @@
                                     <td>
                                         <a href="/dashboard/user/show/{{ $pinjaman->user_id }}">
                                             {{ $pinjaman->user->name }}
-                                        </a>
+                                        </a> @if($pinjaman->user->is_verified == 0) (User belum terverifikasi) @endif
                                     </td>
                                     <td>{!! $pinjaman->status !!}</td>
                                     <td>

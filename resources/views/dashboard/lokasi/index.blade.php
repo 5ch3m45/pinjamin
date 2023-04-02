@@ -47,9 +47,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 50%">Nama</th>
+                                <th>Nama</th>
                                 <th>Barang</th>
-                                <th style="width: 10%">:</th>
+                                <th>:</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,7 +57,7 @@
                             <tr>
                                 <td>
                                     <a href="/dashboard/lokasi/show/{{ $lokasi->id }}">
-                                        <p class="mb-1 text-primary">
+                                        <p class="mb-1 text-primary" style="white-space: nowrap">
                                             {{ $lokasi->nama }}
                                         </p>
                                         <em class="text-secondary">{{ $lokasi->deskripsi }}</em>

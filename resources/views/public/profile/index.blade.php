@@ -12,6 +12,7 @@
             </ol>
         </nav>
 
+        <x-alert.user-belum-terverifikasi/>
         <x-alert.success-and-error/>
 
         <div class="card mb-4">

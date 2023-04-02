@@ -22,6 +22,10 @@ class Barang extends Model
         'lokasi_id'
     ];
 
+    public function fotos() {
+        return $this->hasMany(FotoBarang::class);
+    }
+
     public function lokasi() {
         return $this->belongsTo(Lokasi::class);
     }

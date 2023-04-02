@@ -23,6 +23,12 @@
                     <table id="form-table" class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th>QR</th>
+                                <td>
+                                    <img src="{{ $qr }}" alt="">
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Kode BMN</th>
                                 <td>
                                     <input type="text" class="form-control" name="bnm" value="{{ $barang->bnm_nup ? @explode('#', $barang->bnm_nup)[0] : '' }}">
@@ -93,6 +99,18 @@
                                     @error('keterangan') <div class="mt-2 text-danger">{{ $message }}</div> @enderror
                                 </td>
                             </tr>
+                            <tr>
+                                <th>
+                                    Foto <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#tambah-foto-barang-modal"><i class="bi bi-cloud-arrow-up"></i> Baru</a>
+                                </th>
+                                <td>
+                                    @if($barang->fotos)
+                                        @foreach($barang->fotos as $foto)
+                                        <img src="{{ \Storage::url($foto->foto) }}" alt="" style="max-height: 10rem; max-width: 10rem; margin: auto 0px;">
+                                        @endforeach
+                                    @endif
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -105,4 +123,6 @@
             </form>
         </div>
     </div>
+
+    <x-modal.tambah-foto-barang :id="$barang->id"/>
 @endsection

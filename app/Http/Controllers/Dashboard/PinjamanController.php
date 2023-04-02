@@ -25,9 +25,21 @@ class PinjamanController extends Controller
                 $q->where('kode', 'like', '%'.$request->search.'%');
             });
         }
+        if(@$request->user_not_verified == 1) {
+            $pinjamans = $pinjamans->whereHas('user', function($q) {
+                $q->where('is_verified', 0);
+            });
+            $pinjamans_unverified_user_count = 0;
+        } else {
+            $pinjamans = $pinjamans->whereHas('user', function($q) {
+                $q->where('is_verified', 1);
+            });
+            $pinjamans_unverified_user_count = $pinjamans->count();
+        }
         $pinjamans = $pinjamans->paginate(20)->withQueryString();
         return view('dashboard.pinjaman.index', [
             'pinjamans' => $pinjamans,
+            'pinjamans_unverified_user_count' => $pinjamans_unverified_user_count,
             'search' => $request->search
         ]);
     }

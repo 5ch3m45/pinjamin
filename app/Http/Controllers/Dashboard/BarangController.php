@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\FotoBarang;
 use App\Models\Lokasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use chillerlan\QRCode\QRCode;
 
 class BarangController extends Controller
 {
@@ -106,8 +109,10 @@ class BarangController extends Controller
     public function show($id)
     {
         $barang = Barang::findOrFail($id);
+        $qr = (new QRCode)->render(url('/').'/barang/show/'.$id);
         return view('dashboard.barang.show', [
-            'barang' => $barang
+            'barang' => $barang,
+            'qr' => $qr
         ]);
     }
 
@@ -120,9 +125,13 @@ class BarangController extends Controller
     public function edit($id)
     {
         $barang = Barang::findOrFail($id);
+        $qr = (new QRCode)->render(url('/').'/barang/show/'.$id);
+        $fotos = FotoBarang::where('barang_id', $id)->get();
         $lokasis = Lokasi::get();
         return view('dashboard.barang.edit', [
             'barang' => $barang,
+            'qr' => $qr,
+            'fotos' => $fotos,
             'lokasis' => $lokasis
         ]);
     }
@@ -193,5 +202,39 @@ class BarangController extends Controller
         $barang->delete();
 
         return redirect()->to('/dashboard/barang')->with('success', 'Barang berhasil dihapus.');
+    }
+
+    public function fotoStore($id, Request $request)
+    {
+        $barang = Barang::findOrFail($id);
+
+        if($request->hasFile('images')) {
+            $images = $request->file('images');
+            Log::debug('images:'.json_encode($images));
+            foreach ($images as $image) {
+                Log::error('is image valid:'.$image->isValid());
+                if($image->isValid()) {
+                    $path = $image->store('barang/'.$id);
+                    Log::error('path:'.$path);
+                    $fotoBarang = FotoBarang::create([
+                        'barang_id' => $id,
+                        'foto' => $path
+                    ]);
+                }
+            }
+            return redirect()->back()->with('success', 'Foto berhasil ditambahkan');
+        }
+    }
+
+    public function getQr($barang_id)
+    {
+        $data = url('/barang/show/'.$barang_id);
+        $renderer = new Png();
+        $renderer->setHeight(300);
+        $renderer->setWidth(300);
+        $writer = new Writer($renderer);
+        $image = $writer->writeString($data);
+
+        return response($image)->header('Content-type','image/png');
     }
 }

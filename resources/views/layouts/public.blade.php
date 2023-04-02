@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | PINJAM BARANG</title>
+    <title>@yield('title') | STOK BARANG</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/assets/img/delivery.png">
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -22,7 +22,7 @@
         <div class="border-end bg-ggrey" id="sidebar-wrapper">
             <a href="/dashboard">
                 <div class="sidebar-heading bg-ggrey text-dark">
-                    <img src="/assets/img/delivery.png" style="height: 24px" alt=""> PINJAM BARANG
+                    <img src="/assets/img/delivery.png" style="height: 24px" alt=""> STOK BARANG
                 </div>
             </a>
             <div id="sidebar-menu" class="list-group list-group-flush p-3">
@@ -86,7 +86,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="/assets/vendors/jquery@3.6.3/jquery.min.js"></script>
     <!-- Core theme JS-->
-    <script src="/assets/js/public.js?v={{ time() }}"></script>
+    <script src="/assets/js/user.js?v={{ time() }}"></script>
     @yield('script')
 </body>
 

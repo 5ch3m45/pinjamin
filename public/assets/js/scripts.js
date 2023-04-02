@@ -160,3 +160,24 @@ setTimeout(() => {
         $('.alert').hide();
     }, 500);
 }, 4000);
+
+$(document).on('click', '.verifikasi-user', function() {
+    const _id = $(this).data('id');
+    const nama = $(this).data('nama');
+    $('#verifikasi-user-form').attr('action', '/dashboard/user/edit/'+_id+'/verifikasi');
+    $('#nama-user').text(nama);
+    $('#verifikasi-user-modal').modal('show');
+});
+
+$(document).on('click', '.hapus-user', function() {
+    const _id = $(this).data('id');
+    const nama = $(this).data('nama');
+    $('#hapus-user-form').attr('action', '/dashboard/user/delete/'+_id);
+    $('#nama-user-hapus').text(nama);
+    $('#hapus-user-modal').modal('show');
+});
+
+$(document).ready(function() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+})

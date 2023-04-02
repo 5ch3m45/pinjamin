@@ -16,6 +16,7 @@
 
 @section('content')
     <div>
+        <x-alert.user-belum-terverifikasi/>
         <x-alert.success-and-error/>
         
         <div class="card mb-4">
@@ -24,7 +25,7 @@
                 <form class="row">
                     <div class="col-12 col-md-3 mb-3">
                         <label class="form-label">Cari</label>
-                        <input type="text" name="search" class="form-control" placeholder="Cari" value="">
+                        <input type="text" name="search" class="form-control" placeholder="Cari" value="{{ $search }}">
                     </div>
                     <div class="col-12 col-md-3 mb-3">
                         <label class="form-label">Urutkan</label>
@@ -61,7 +62,9 @@
             @foreach ($barangs as $key => $barang)
             <div class="grid-item p-2">
                     <div class="card">
-                        <img src="/assets/img/placeholder.jpeg" class="card-img-top" alt="...">
+                        @if($barang->fotos && $barang->fotos->count() > 0)
+                        <img src="{{ \Storage::url($barang->fotos[0]->foto) }}" class="card-img-top" style="border-radius: 10px 10px 5px 5px">
+                        @endif
                         <div class="card-body">
                             <h6 class="card-title">{{ $barang->nama }} {{ $barang->merk }}</h6>
                             <p class="card-text">{{ $barang->keterangan ?? '-' }}</p>
@@ -75,7 +78,7 @@
                                 @else
                                 <a href="/troli/quick-add/{{ $barang->id }}" class="btn btn-success me-2">Pinjam sekarang</a>
                                 @endif
-                                {{-- <a href="/barang/show/{{ $barang->id }}" class="btn btn-primary">Detail</a> --}}
+                                <a href="/barang/show/{{ $barang->id }}" class="btn btn-primary">Detail</a>
                             </div>
                         </div>
                     </div>

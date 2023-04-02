@@ -30,17 +30,20 @@ Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'store']);
 
 Route::get('/', [UserBarangController::class, 'index']);
-Route::get('/troli', [UserTroliController::class, 'index']);
-Route::get('/troli/next', [UserTroliController::class, 'next']);
-Route::post('/troli/next', [UserTroliController::class, 'store']);
-Route::get('/troli/quick-add/{id}', [UserTroliController::class, 'quickStore']);
-Route::get('/troli/quick-delete/{id}', [UserTroliController::class, 'quickDestroy']);
-Route::get('/pinjaman/create', [UserRiwayatPinjamanController::class, 'create']);
+Route::get('barang/show/{id}', [UserBarangController::class, 'show']);
+Route::get('troli', [UserTroliController::class, 'index']);
+Route::get('troli/quick-add/{id}', [UserTroliController::class, 'quickStore']);
+Route::get('troli/quick-delete/{id}', [UserTroliController::class, 'quickDestroy']);
+Route::get('pinjaman/create', [UserRiwayatPinjamanController::class, 'create']);
+Route::group(['middleware' => 'user_is_verified'])->group(function () {
+    Route::get('troli/next', [UserTroliController::class, 'next']);
+    Route::post('troli/next', [UserTroliController::class, 'store']);
+});
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/profile', [UserProfileController::class, 'index']);
-    Route::get('/riwayat-pinjaman', [UserRiwayatPinjamanController::class, 'index']);
-    Route::get('/pinjaman/show/{id}', [UserRiwayatPinjamanController::class, 'show']);
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('profile', [UserProfileController::class, 'index']);
+    Route::get('riwayat-pinjaman', [UserRiwayatPinjamanController::class, 'index']);
+    Route::get('pinjaman/show/{id}', [UserRiwayatPinjamanController::class, 'show']);
+    Route::get('logout', [AuthController::class, 'logout']);
 });
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'is_admin']], function() {
@@ -60,6 +63,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'is_admin']], fu
     Route::get('/barang/show/{id}', [BarangController::class, 'show']);
     Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
     Route::post('/barang/edit/{id}', [BarangController::class, 'update']);
+    Route::post('/barang/edit/{id}/foto', [BarangController::class, 'fotoStore']);
     Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy']);
 
     Route::get('/lokasi', [LokasiController::class, 'index']);
@@ -87,4 +91,5 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'is_admin']], fu
 
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/user/show/{id}', [UserController::class, 'show']);
+    Route::post('/user/edit/{id}/verifikasi', [UserController::class, 'verify']);
 });

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | PINJAM BARANG</title>
+    <title>@yield('title') | STOK BARANG</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/assets/img/delivery.png">
     <!-- Styles -->
@@ -24,7 +24,7 @@
         <div class="border-end bg-ggrey" id="sidebar-wrapper">
             <a href="/">
                 <div class="sidebar-heading bg-ggrey text-dark">
-                    <img src="/assets/img/delivery.png" style="height: 24px" alt=""> PINJAM BARANG
+                    <img src="/assets/img/delivery.png" style="height: 24px" alt=""> STOK BARANG
                 </div>
             </a>
             <div id="sidebar-menu" class="list-group list-group-flush p-3">

@@ -103,4 +103,13 @@ class UserController extends Controller
     {
         //
     }
+
+    public function verify($id)
+    {
+        $user = User::findOrFail($id);
+        $user->update([
+            'is_verified' => 1
+        ]);
+        return redirect()->back()->with('success', 'User '.$user->name.' berhasil diverifikasi.');
+    }
 }

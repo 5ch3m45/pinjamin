@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | PINJAM BARANG</title>
+    <title>@yield('title') | STOK BARANG</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/assets/img/delivery.png">
     <!-- Core theme CSS (includes Bootstrap)-->
