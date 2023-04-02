@@ -35,7 +35,7 @@ Route::get('troli', [UserTroliController::class, 'index']);
 Route::get('troli/quick-add/{id}', [UserTroliController::class, 'quickStore']);
 Route::get('troli/quick-delete/{id}', [UserTroliController::class, 'quickDestroy']);
 Route::get('pinjaman/create', [UserRiwayatPinjamanController::class, 'create']);
-Route::group(['middleware' => 'user_is_verified'])->group(function () {
+Route::group(['middleware' => 'user_is_verified'], function () {
     Route::get('troli/next', [UserTroliController::class, 'next']);
     Route::post('troli/next', [UserTroliController::class, 'store']);
 });
