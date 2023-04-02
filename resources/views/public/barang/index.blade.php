@@ -47,8 +47,8 @@
             @if($barangs)
             <div class="grid-sizer p-2">
                 <div class="card shadow-none">
-                    @if($barang->fotos && $barang->fotos->count() > 0)
-                        <img src="/assets/{{ $barang->fotos[0]->foto }}" class="card-img-top" style="border-radius: 10px 10px 5px 5px">
+                    @if($barangs[0]->fotos && $barangs[0]->fotos->count() > 0)
+                        <img src="/assets/{{ $barangs[0]->fotos[0]->foto }}" class="card-img-top" style="border-radius: 10px 10px 5px 5px">
                     @endif
                     <div class="card-body shadow-none">
                         <h6 class="card-title">{{ $barangs[0]->nama }} {{ $barangs[0]->merk }}</h6>
