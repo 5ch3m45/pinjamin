@@ -28,6 +28,10 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'store']);
+Route::get('/lupa-password', [AuthController::class, 'lupaPasswordIndex']);
+Route::post('/lupa-password', [AuthController::class, 'lupaPasswordStore']);
+Route::get('/reset-password', [AuthController::class, 'resetPasswordIndex']);
+Route::post('/reset-password', [AuthController::class, 'resetPasswordStore']);
 
 Route::get('/', [UserBarangController::class, 'index']);
 Route::get('barang/show/{id}', [UserBarangController::class, 'show']);

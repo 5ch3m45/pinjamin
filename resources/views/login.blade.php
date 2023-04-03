@@ -28,10 +28,17 @@
                             <label class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                         </div>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Ingat saya
-                        </label>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Ingat saya
+                                </label>
+                            </div>
+                            <div>
+                                <a href="/lupa-password">Lupa password?</a>
+                            </div>
+                        </div>
                         <div class="d-flex justify-content-between mt-4">
                             <a href="/register">
                                 <button type="button" class="btn btn-white">Registrasi</button>

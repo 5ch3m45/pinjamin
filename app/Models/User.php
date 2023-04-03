@@ -25,7 +25,9 @@ class User extends Authenticatable
         'unit',
         'password',
         'phone',
-        'is_verified'
+        'is_verified',
+        'reset_password_token',
+        'reset_password_expired'
     ];
 
     /**

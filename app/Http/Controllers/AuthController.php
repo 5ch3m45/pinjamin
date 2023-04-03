@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPasswordToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
@@ -135,5 +137,75 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function lupaPasswordIndex()
+    {
+        return view('lupa-password');
+    }
+
+    public function lupaPasswordStore(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if(!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+        
+        $token = \Str::random(16);
+        $expired = new \DateTime('+24 hours');
+        
+        $user->update([
+            'reset_password_token' => $token,
+            'reset_password_expired' => $expired->format('Y-m-d H:i:s')
+        ]);
+
+        try{
+            $mail = new ResetPasswordToken($user, $token);
+            Mail::to($user->email)->send($mail);
+            return redirect()->back()->with('success', 'Token berhasil dikirimkan.');
+        } catch (\Exception $e) {
+            \Log::error('error send email:'.$e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan.');
+        }
+    }
+
+    public function resetPasswordIndex()
+    {
+        return view('reset-password');
+    }
+
+    public function resetPasswordStore(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'token' => 'required|string',
+            'password' => 'required|min:6'
+        ]);
+
+        $user = User::where([
+            'email' => $request->email,
+            'reset_password_token' => $request->token,
+        ])->first();
+        if(!$user) {
+            return redirect()->back()->with('error', 'Email/token tidak tepat.');
+        }
+
+        if(strtotime($user->reset_password_expired) < time()) {
+            return redirect()->back()->with('error', 'Token telah kadaluarsa.');
+        }
+        
+        $password = Hash::make($request->password);
+        
+        $user->update([
+            'password' => $password,
+            'reset_password_token' => NULL,
+            'reset_password_expired' => NULL
+        ]);
+
+        return redirect()->to('login')->with('success', 'Password berhasil diubah. Silahkan login.');
     }
 }
