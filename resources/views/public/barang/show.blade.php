@@ -52,7 +52,7 @@
                             <tr>
                                 <th>Lokasi</th>
                                 <td>
-                                    <a href="/dashboard/lokasi/show/{{ $barang->lokasi_id }}">{{ $barang->lokasi->nama }}</a>
+                                    {{ $barang->lokasi->nama }}
                                 </td>
                             </tr>
                             <tr>
@@ -61,7 +61,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    Foto <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#tambah-foto-barang-modal"><i class="bi bi-cloud-arrow-up"></i> Baru</a>
+                                    Foto
                                 </th>
                                 <td>
                                     <div id="img-viewer" class="row" style="max-width: 1024px">
