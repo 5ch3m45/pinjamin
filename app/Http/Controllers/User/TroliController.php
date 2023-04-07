@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use \Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Mail\InfoPeminjaman;
 use App\Mail\SignupInfo;
 use App\Models\Barang;
 use App\Models\Pinjaman;
@@ -134,6 +135,14 @@ class TroliController extends Controller
             ]);
         }
         $pinjaman_barangs = PinjamanBarang::insert($pinjaman_barangs);
+
+        try {
+            $infoPeminjamanMail = new InfoPeminjaman($pinjaman, $user);
+            Mail::to($user->email)->send($infoPeminjamanMail);
+        } catch (\Exception $e) {
+            \Log::error('error send email:'.$e->getMessage());
+        }
+
         $request->session()->put('troli', []);
 
         return redirect()->to('/riwayat-pinjaman')->with('success', 'Peminjaman barang berhasil diajukan.');
