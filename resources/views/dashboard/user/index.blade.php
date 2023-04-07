@@ -29,6 +29,13 @@
                         </select>
                     </div>
                     <div class="col-12 col-md-3 mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="is_verified" class="form-control">
+                            <option value="1">Terverifikasi</option>
+                            <option value="0" @if($is_verified == 0) selected @endif>Belum terverifikasi</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
                         <div>
                             <label class="form-label">&nbsp;</label>
                         </div>

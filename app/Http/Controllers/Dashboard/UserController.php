@@ -25,11 +25,19 @@ class UserController extends Controller
             });
         }
 
-        $users = $users->paginate(20)->withQueryString();
+        if($request->is_verified == 0) {
+            $users = $users->where('is_verified', 0);
+        } else {
+            $users = $users->where('is_verified', 1);
+        }
+
+        $users = $users->orderBy('name')
+            ->paginate(20)->withQueryString();
 
         return view('dashboard.user.index', [
             'users' => $users,
-            'search' => $request->search
+            'search' => $request->search,
+            'is_verified' => $request->is_verified ?? 1
         ]);
     }
 
