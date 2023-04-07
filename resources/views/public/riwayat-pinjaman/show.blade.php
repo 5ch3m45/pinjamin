@@ -27,7 +27,11 @@
                             </tr>
                             <tr>
                                 <th>Tanggal Pengajuan</th>
-                                <td>{{ $pinjaman->tanggal_pengajuan }}</td>
+                                <td>{{ date('d M Y', strtotime($pinjaman->tanggal_pengajuan)) }}</td>
+                            </tr>
+                            <tr>
+                                <th>Rencana Pengembalian</th>
+                                <td>{{ date('d M Y', strtotime($pinjaman->rencana_pengembalian)) }}</td>
                             </tr>
                             <tr>
                                 <th>Status</th>
@@ -47,23 +51,26 @@
                         <thead>
                             <tr>
                                 <th>Nama Barang</th>
+                                <th>Lokasi</th>
                                 <th>Tanggal Dipinjamkan</th>
                                 <th>Tanggal Dikembalikan</th>
-                                <th>:</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pinjaman_barangs as $pinjaman_barang)
                             <tr>
                                 <td style=""">
-                                    <a href="/barang/show/{{ $pinjaman_barang->barang_id }}">{{ $pinjaman_barang->barang->nama }}</a>
+                                    <a href="/barang/show/{{ $pinjaman_barang->barang_id }}">{{ $pinjaman_barang->barang->merk }}: {{ $pinjaman_barang->barang->nama }}</a>
+                                </td>
+                                <td style=""">
+                                    {{ $pinjaman_barang->barang->lokasi->nama }}
                                 </td>
                                 <td style="" id="tanggal-peminjaman-{{ $pinjaman_barang->id }}">
                                     @if($pinjaman_barang->tanggal_peminjaman)
                                         @if($pinjaman_barang->tanggal_peminjaman == '1970-01-01')
                                             <span class="text-danger">TIDAK DISETUJUI</span>
                                         @else
-                                            {{ $pinjaman_barang->tanggal_peminjaman }}
+                                            {{ date('d M Y', strtotime($pinjaman_barang->tanggal_peminjaman)) }}
                                         @endif
                                     @else
                                         MENUNGGU KONFIRMASI ADMIN
@@ -71,7 +78,8 @@
                                 </td>
                                 <td style="" id="tanggal-pengembalian-{{ $pinjaman_barang->id }}">
                                     @if($pinjaman_barang->tanggal_peminjaman)
-                                        @if($pinjaman_barang->tanggal_pengembalian) {{ $pinjaman_barang->tanggal_pengembalian }}
+                                        @if($pinjaman_barang->tanggal_pengembalian) 
+                                            {{ date('d M Y', strtotime($pinjaman_barang->tanggal_pengembalian)) }}
                                         @else 
                                             @if($pinjaman_barang->tanggal_peminjaman == '1970-01-01')
                                                 -
