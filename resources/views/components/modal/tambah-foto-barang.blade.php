@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Pilih Foto</label>
-                    <input type="file" multiple class="form-control" id="exampleFormControlInput1" name="images[]" accept="image/*">
+                    <input type="file" multiple class="form-control" id="exampleFormControlInput1" name="images[]" accept="image/*" maxlength="2097152">
                 </div>
             </div>
             <div class="modal-footer">

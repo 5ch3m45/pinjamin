@@ -177,6 +177,9 @@ $(document).on('click', '.hapus-user', function() {
     $('#hapus-user-modal').modal('show');
 });
 
+// As a jQuery plugin
+$('#img-viewer').viewer({});
+
 $(document).ready(function() {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
