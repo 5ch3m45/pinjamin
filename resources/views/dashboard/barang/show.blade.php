@@ -65,12 +65,17 @@
                                 <th>
                                     Foto <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#tambah-foto-barang-modal"><i class="bi bi-cloud-arrow-up"></i> Baru</a>
                                 </th>
-                                <td id="img-viewer">
-                                    @if($barang->fotos)
-                                        @foreach($barang->fotos as $foto)
-                                        <img src="/assets/{{ ($foto->foto) }}" alt="" style="max-height: 10rem; max-width: 10rem; margin: auto 0px;">
-                                        @endforeach
-                                    @endif
+                                <td>
+                                    <div id="img-viewer" class="row" style="max-width: 1024px">
+                                        @if($barang->fotos)
+                                            @foreach($barang->fotos as $foto)
+                                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column mb-3">
+                                                <img src="/assets/{{ ($foto->foto) }}" class="img-barang" alt="" style="max-height: 10rem; max-width: 10rem; margin: auto 0px;">
+                                                <button class="btn btn-block btn-danger hapus-foto-barang" data-barang-id="{{ $barang->id }}" data-id="{{ $foto->id }}"><i class="bi bi-trash"></i></button>
+                                            </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -113,5 +118,6 @@
         @endif
         <x-modal.hapus-barang/>
         <x-modal.tambah-foto-barang :id="$barang->id"/>
+        <x-modal.hapus-foto-barang/>
     </div>
 @endsection

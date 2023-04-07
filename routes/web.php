@@ -68,6 +68,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'is_admin']], fu
     Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
     Route::post('/barang/edit/{id}', [BarangController::class, 'update']);
     Route::post('/barang/edit/{id}/foto', [BarangController::class, 'fotoStore']);
+    Route::delete('/barang/edit/{id}/foto/{foto}', [BarangController::class, 'fotoDestroy']);
     Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy']);
 
     Route::get('/lokasi', [LokasiController::class, 'index']);

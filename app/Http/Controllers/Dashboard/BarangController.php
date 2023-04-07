@@ -226,6 +226,13 @@ class BarangController extends Controller
         }
     }
 
+    public function fotoDestroy($id, $foto)
+    {
+        $image = FotoBarang::findOrFail($foto);
+        $image->delete();
+        return redirect()->back()->with('success', 'Foto berhasil dihapus.');
+    }
+
     public function getQr($barang_id)
     {
         $data = url('/barang/show/'.$barang_id);

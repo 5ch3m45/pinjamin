@@ -183,4 +183,16 @@ $('#img-viewer').viewer({});
 $(document).ready(function() {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-})
+});
+
+$(document).on('.img-barang', "contextmenu", function(e) {
+    e.preventDefault();
+    console.log('haha')
+});
+
+$(document).on('click', '.hapus-foto-barang', function() {
+    const _id = $(this).data('id');
+    const barang_id = $(this).data('barang-id');
+    $('#hapus-foto-barang-form').attr('action', '/dashboard/barang/edit/'+barang_id+'/foto/'+_id);
+    $('#hapus-foto-barang-modal').modal('show');
+});
