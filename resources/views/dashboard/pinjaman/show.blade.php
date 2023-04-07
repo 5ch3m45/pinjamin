@@ -83,7 +83,7 @@
                                         @if($pinjaman_barang->tanggal_peminjaman == '1970-01-01')
                                             <span class="text-danger">TIDAK DISETUJUI</span>
                                         @else
-                                            {{ $pinjaman_barang->tanggal_peminjaman }}
+                                            {{ date('d M Y', strtotime($pinjaman_barang->tanggal_peminjaman)) }}
                                         @endif
                                     @else
                                         <a href="javascript:void(0)" class="text-primary konfirmasi-pinjaman" data-id="{{ $pinjaman_barang->id }}">Konfirmasi pinjaman</a> |
@@ -92,7 +92,8 @@
                                 </td>
                                 <td style="" id="tanggal-pengembalian-{{ $pinjaman_barang->id }}">
                                     @if($pinjaman_barang->tanggal_peminjaman)
-                                        @if($pinjaman_barang->tanggal_pengembalian) {{ $pinjaman_barang->tanggal_pengembalian }}
+                                        @if($pinjaman_barang->tanggal_pengembalian) 
+                                            {{ date('d M Y', strtotime($pinjaman_barang->tanggal_pengembalian)) }}
                                         @else 
                                             @if($pinjaman_barang->tanggal_peminjaman == '1970-01-01')
                                                 -
